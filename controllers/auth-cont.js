@@ -36,10 +36,45 @@ const register = async (req,res)=>{
             phone,
             password 
         });
-        res.status(201).json({msg:userCreated});
+            res.status(201).json({
+            msg:"Registration Successfull",
+            token:await userCreated.generateToken(),
+            userid:userCreated._id.toString(),});
     }catch(error){
-       res.status(400).json({msg:"page not found"})
+       res.status(500).json({msg:"page not found"})
     }
 };
 
-module.exports = {home,register};
+// *___________________
+// Login logic 
+// *___________________
+
+const login = async (req,res)=>{
+    try {
+        const {email,password} = req.body;
+        const userExist = await User.findOne({email});
+        console.log(userExist);
+        if(!userExist){
+            return res.status(500).json({msg:"Invalid Credential"});
+        }
+        const user = await bcrypt.compare(password,userExist.password);
+        if(user){
+                res.status(200).json({
+                msg:"Login Successfull",
+                token: await userExist.generateToken(),
+                userId: userExist._id.toString(),
+            });
+        }
+        else{
+            res.status(401).json({msg:"Invalid email or password"});
+        }
+    } catch (error) {
+        res.status(500).json("Page not found");
+    }
+}
+
+// In most cases,converting _id to a string is a good practice because it ensures consistency and compatibility 
+// across differnt JWT libraries and system. It also aligns with the expectations that claims in a JWT
+// are represented as strings
+
+module.exports = {home,register,login};
