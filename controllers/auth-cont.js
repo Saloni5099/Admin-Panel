@@ -41,7 +41,8 @@ const register = async (req,res)=>{
             token:await userCreated.generateToken(),
             userid:userCreated._id.toString(),});
     }catch(error){
-       res.status(500).json({msg:"page not found"})
+       //res.status(500).json({msg:"page not found"});
+       next(error);
     }
 };
 
