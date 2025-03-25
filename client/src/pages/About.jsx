@@ -7,7 +7,7 @@ export const About = () => {
           <section className="section-hero">
              <div className="container grid grid-two-cols">
                <div className="hero-content">
-                    <p>Welcome Thapa Technical</p>
+                    <p>Welcome Saloni!!</p>
                     <h1>Why Choose Us?</h1>
                     <p>Expertise:Our team consistes of experienced IT professionals who are
                     passionate about staying up-to-date with the latest industry trends.
