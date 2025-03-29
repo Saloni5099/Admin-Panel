@@ -75,8 +75,24 @@ const login = async (req,res)=>{
     }
 }
 
+/*_____________________________
+
+USER LOGIN
+_______________________________*/
+
+
+const user = async(req,res)=>{
+    try {
+        const userData = req.user;
+        console.log(userData);
+        return res.status(200).json({msg:userData});
+    } catch (error) {
+        console.log(`error from the user route ${error}`);
+    }
+};
+
 // In most cases,converting _id to a string is a good practice because it ensures consistency and compatibility 
 // across differnt JWT libraries and system. It also aligns with the expectations that claims in a JWT
 // are represented as strings
 
-module.exports = {home,register,login};
+module.exports = {home,register,login,user};
