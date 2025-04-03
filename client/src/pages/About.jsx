@@ -1,13 +1,16 @@
+
 import { Analytics } from "../component/Analytics";
+import { useAuth } from "../store/auth";
 
 export const About = () => {
+    const {user} = useAuth();
     return (
         <>
         <main>
           <section className="section-hero">
              <div className="container grid grid-two-cols">
                <div className="hero-content">
-                    <p>Welcome Saloni!!</p>
+                    <p>Welcome {user?`${user.username} to our website`:"to our website"}!!</p>
                     <h1>Why Choose Us?</h1>
                     <p>Expertise:Our team consistes of experienced IT professionals who are
                     passionate about staying up-to-date with the latest industry trends.
