@@ -6,6 +6,7 @@ const app = express();
 const authRouter = require("./router/auth-route");
 const contactRouter = require("./router/contact-router");
 const serviceRouter = require("./router/service-router");
+const adminRouter = require("./router/admin-route");
 
 const connectDb = require("./utils/db");
 const errorMiddleware = require("./middlewares/error-middleware");
@@ -21,12 +22,17 @@ app.use("/api/auth", authRouter);
 app.use("/api/form", contactRouter);
 app.use("/api/data", serviceRouter);
 
-app.get("/",(req,res)=>{
-    res.status(200).send("Welcome to my website");
-});
-app.get("/register",(req,res)=>{
-    res.status(200).send("Welcome to registration page");
-});
+//admin route
+
+app.use("/api/admin",adminRouter);
+
+
+// app.get("/",(req,res)=>{
+//     res.status(200).send("Welcome to my website");
+// });
+// app.get("/register",(req,res)=>{
+//     res.status(200).send("Welcome to registration page");
+// });
 app.use(errorMiddleware);
 const PORT = 5000;
 connectDb().then(() => {

@@ -90,6 +90,9 @@ a:hover,a.active{
 /***Hero Section ***/
 
 .section-hero{
+  background: linear-gradient(rgba(37, 33, 33, 0.9), rgba(0, 0, 0, 0.9)), 
+              url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+  padding: 8rem 0;
   &.grid{
     align-items: center;
   }
@@ -115,6 +118,9 @@ a:hover,a.active{
 **___________________________ */
 
 .section-contact{
+  background: linear-gradient(rgba(37, 33, 33, 0.9), rgba(0, 0, 0, 0.9)), 
+              url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+  padding: 8rem 0;
   & .contact-content{
     padding:0;
 
@@ -252,19 +258,32 @@ a:hover,a.active{
  registration css 
  _______________________*/
 
-.section-registration{
-  padding:0 3.2rem;
-
-  & .container{
-    padding:10rem;
+ .section-registration, .section-login {
+  background: linear-gradient(rgba(37, 33, 33, 0.9), rgba(0, 0, 0, 0.9)), 
+              url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+  padding: 8rem 0;
+  
+  .container {
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 6.4rem;
+    max-width: 120rem;
+  }
+  
+  .registration-image, .login-image {
+    display: flex;
+    justify-content: center;
     align-items: center;
-
-    & .registration-image{
-      width:10%;
-      height:auto;
+    
+    img {
+      width: 100%;
+      max-width: 50rem;
+      height: auto;
+      border-radius: var(--border-radius);
     }
   }
-  & .registration form{
+  
+  form {
     & label{
       display: block;
       margin:2.4rem 0 0.8rem 0;
@@ -277,41 +296,144 @@ a:hover,a.active{
     & button{
       margin-top: 3.2rem;
     }
+  
   }
 }
-/* ________________________
 
-login css
-__________________________*/
+/* ____________________________
+ service page css
+ _____________________________*/
 
-.section-login{
-  padding:0 3.2rem;
+ /* Services Section */
+/* Services Section */
+.section-services {
+  padding: 8rem 0;
+  background: linear-gradient(rgba(37, 33, 33, 0.9), rgba(0, 0, 0, 0.9)), 
+              url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+}
 
-  & .container{
-    padding:3.2rem;
-    align-items: center;
-   
-    & login-image{
-      width:50%;
-      height:auto;
-    } 
-   
+.main-heading {
+  color: var(--bg-color);
+  text-align: center;
+  margin-bottom: 6.4rem;
+  position: relative;
+  font-size: 5.4rem;
+  line-height: 1.1;
+  font-weight: bold;
+}
+
+.main-heading::after {
+  content: '';
+  position: absolute;
+  bottom: -1.6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10rem;
+  height: 0.4rem;
+  background: var(--btn-color);
+  border-radius: 0.2rem;
+}
+
+.grid-three-cols {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(30rem, 1fr));
+  gap: 6.4rem;
+}
+
+.card {
+  background: var(--bg-color);
+  border-radius: 0.8rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.card:hover {
+  transform: translateY(-1rem);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.card-img img {
+  width: 100%;
+  height: 25rem;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.card:hover .card-img img {
+  transform: scale(1.05);
+}
+
+.card-details {
+  padding: 2.4rem;
+}
+
+.card-details h2 {
+  font-size: 2.4rem;
+  margin: 1.6rem 0;
+  color: var(--dark-color);
+}
+
+.card-details p {
+  color: var(--dark-color);
+  margin-bottom: 1.6rem;
+  font-size: 1.8rem;
+  line-height: 1.56;
+  letter-spacing: 0.1rem;
+  word-spacing: 0.06rem;
+}
+
+.grid-two-cols {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.6rem;
+  margin-bottom: 2rem;
+}
+
+.grid-two-cols p:first-child {
+  font-weight: bold;
+  color: var(--btn-color);
+}
+
+.grid-two-cols p:last-child {
+  text-align: right;
+  font-weight: bold;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+  .grid-three-cols {
+    grid-template-columns: repeat(2, 1fr);
   }
-  & .login form{
-   
-    & label{
-      display: block;
-      margin:2.4rem 0 0.8rem 0;
-      text-transform: capitalize;
-      
-    }
-    & input{
-      width:80%;
-      padding:0.6rem 0 0.6rem;
-    }
-    & button{
-      margin-top: 3.2rem;
-    }
+}
+
+@media (max-width: 768px) {
+  .grid-three-cols {
+    grid-template-columns: 1fr;
+    gap: 4.8rem;
+  }
+  
+  .main-heading {
+    font-size: 4.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-heading {
+    font-size: 3.6rem;
+  }
+  
+  .card-details {
+    padding: 1.6rem;
+  }
+  
+  .grid-two-cols {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+  
+  .grid-two-cols p:last-child {
+    text-align: left;
   }
 }
 
