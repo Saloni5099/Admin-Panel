@@ -6,6 +6,8 @@ export const AuthProvider = ({children}) => {
     const [token,setToken]=useState(localStorage.getItem("token"));
     const [user,setUser] = useState("");
     const [services,setServices] = useState([]);
+    const authorizationToken = `Bearer ${token}`;
+    const API = "http://localhost:5000";
     const storeTokenInLS = (serverToken)=>{
         setToken(serverToken);        // add it to not refresh after login
         return localStorage.setItem("token",serverToken);
@@ -18,10 +20,10 @@ export const AuthProvider = ({children}) => {
     // JWT AUTHENTICATION -to get the currently loggedIN user data
     const userAuthentication = async ()=>{
         try {
-            const response = await fetch("http://localhost:5000/api/auth/user",{
+            const response = await fetch(`${API}/api/auth/user`,{
                 method:"GET",
                 headers:{
-                    Authorization:`Bearer ${token}`,
+                    Authorization:authorizationToken,
                 },
             });
             if(response.ok){
@@ -36,7 +38,7 @@ export const AuthProvider = ({children}) => {
     // to fetch the services data from the database
     const getServices = async()=>{
         try {
-           const response = await fetch("http://localhost:5000/api/data/service",{
+           const response = await fetch(`${API}/api/data/service`,{
             method:"GET",
            });
            if(response.ok){
@@ -53,7 +55,7 @@ export const AuthProvider = ({children}) => {
         userAuthentication();
     },[]);
     return (
-     <AuthContext.Provider value={{isLoggedIn,storeTokenInLS,LogoutUser,user,services}}>
+     <AuthContext.Provider value={{isLoggedIn,storeTokenInLS,LogoutUser,user,services,authorizationToken,API}}>
         {children}
      </AuthContext.Provider>
     );

@@ -304,7 +304,6 @@ a:hover,a.active{
  service page css
  _____________________________*/
 
- /* Services Section */
 /* Services Section */
 .section-services {
   padding: 8rem 0;
@@ -437,6 +436,42 @@ a:hover,a.active{
   }
 }
 
+/*_________________________
 
+Admin page css
+____________________________*/
+
+
+body tr{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(10rem,1fr));
+  align-items:center;
+  box-shadow: 0 0.3rem 0 grey;
+  margin-bottom:10px;
+  border-bottom: 4px solid transparent;
+  color: Blue;
+
+  &:last-child{
+    box-shadow:none;
+  }
+}
+table{
+  background: #fff;
+  box-shadow: rgba(255,255,255,0.25)0px 7px 29px 0px;
+  border-collapse: collapse;
+  border-radius: 1 rem;
+  -webkit-border-radius: 1rem;
+  -moz-border-radius: 1rem;
+  -ms-border-radius: 1rem;
+  -o-border-radius: 1rem;
+}
+td{
+  font-size:1.7rem;
+  letter-spacing: 0.1rem;
+  padding:3rem;
+  text-align: center;
+  color:var(--dark-color);
+  width:30rem;
+}
 
 

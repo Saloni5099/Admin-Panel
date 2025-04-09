@@ -9,6 +9,9 @@ import { Error }  from "./pages/Error";
 import { Navbar } from "./component/Navbar";
 import { Footer } from "./component/Footer/Footer";
 import { Logout } from "./pages/Logout";
+import { AdminLayout } from "./component/layouts/Admin-Layout";
+import { AdminUsers } from "./pages/Admin-Users";
+import { AdminContacts } from "./pages/Admin-Contacts";
 
 const App = () => {
   return <>
@@ -23,6 +26,10 @@ const App = () => {
            <Route path="/login" element={<Login />} />
            <Route path="/logout" element={<Logout />} />
            <Route path="*" element={<Error />} />
+           <Route path="/admin" element={<AdminLayout/>}>
+               <Route path="users" element={<AdminUsers/>}/>
+               <Route path="contacts" element={<AdminContacts/>}/>
+           </Route>
         </Routes>
         <Footer/>
     </BrowserRouter>
