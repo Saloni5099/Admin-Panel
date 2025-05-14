@@ -13,7 +13,7 @@ export const AdminUsers = ()=>{
                 }
             });
             const data = await response.json();
-            console.log("Fetched Data : ", data);
+            // console.log("Fetched Data : ", data);
 
             setUsers(data);
         } catch (error) {

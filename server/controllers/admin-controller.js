@@ -2,8 +2,11 @@ const Contact = require("../models/contact-model");
 const User = require("../models/user-model");
 
 /*_________________________
+
 get all users logic
 __________________________*/
+
+
 const getAllUsers = async(req,res)=>{
     try {
         const users = await User.find({},{password:0});      // to not show the password we use this {},{password:0}
@@ -18,6 +21,7 @@ const getAllUsers = async(req,res)=>{
 }
 
 /*___________________________
+
  delete user logic
  ___________________________*/
 
@@ -31,10 +35,11 @@ const getAllUsers = async(req,res)=>{
     }
  }
 /* ________________________
-edit user data
+
+get single user data
 ___________________________*/
 
-const getUserById = async(req,res)=>{
+const getUserById = async(req,res,next)=>{
     try {
         const id = req.params.id;
         const data = await User.findOne({_id:id},{password:0});
@@ -43,9 +48,26 @@ const getUserById = async(req,res)=>{
         next(error);
     }
 }
+/* ________________________
+
+Update user data
+___________________________*/
+
+const UpdateUserById = async(req,res)=>{
+    try {
+        const id = req.params.id;
+        const updateUserData = req.body;
+        const updatedData = await User.updateOne({_id:id},{$set:updateUserData});
+        return res.status(200).json({updatedData});
+    } catch (error) {
+        next(error);
+    }
+}
 /*_________________________
+
 get all contacts logic
 __________________________*/
+
 const getAllContacts = async (req,res)=>{
     try {
         const contacts = await Contact.find();
@@ -58,5 +80,19 @@ const getAllContacts = async (req,res)=>{
         next(error);
     }
 }
+/*___________________________
 
-module.exports = {getAllUsers,getAllContacts,deleteUserById,getUserById};
+ delete COntact logic
+ ___________________________*/
+
+ const deleteContactById = async (req,res) =>{
+    try {
+        const id = req.params.id;
+        await Contact.deleteOne({_id:id});
+        return res.status(200).json({message:"Contact Deleted Successfully"});
+    } catch (error) {
+        next(error);
+    }
+ }
+
+module.exports = {getAllUsers,getAllContacts,deleteUserById,getUserById,UpdateUserById,deleteContactById};
