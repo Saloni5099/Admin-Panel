@@ -50,19 +50,33 @@ export const AdminContacts = ()=>{
     return (
         <>
           <section className="admin-contacts-section">
+            <div className="container">
             <h1>Admin Contact Data</h1>
-            <div className="container admin-users">
-                {contactData.map((curContactData,index)=>{
+            </div>
+            <div className="admin-contact">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>message</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                  <tbody>
+                   {contactData.map((curContactData,index)=>{
                     const{username,email,message,_id} = curContactData;
                     return(
-                        <div key={index}>
-                            <p>{username}</p>
-                            <p>{email}</p>
-                            <p>{message}</p>
-                            <button className="btn" onClick={()=>deleteContactById(_id)}>delete</button>
-                            </div>
+                        <tr key={index}>
+                            <td>{username}</td>
+                            <td>{email}</td>
+                            <td>{message}</td>
+                            <td className="delete-col"><button onClick={()=>deleteUser(curUser._id)}>Delete</button></td>
+                            </tr>
                     )
                 })}
+            </tbody>
+            </table>
             </div>
           </section>
         </>

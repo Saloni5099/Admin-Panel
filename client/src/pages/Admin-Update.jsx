@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom";
+import {useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../store/auth";
 import {toast} from "react-toastify";
 
@@ -29,8 +29,17 @@ const getSingleUserData = async () => {
         //     throw new Error(`HTTP error! status: ${response.status}`);
         // }
         const data = await response.json();
+        
+        // console.log("Fetched data:", json);
+        if (data?.data) {
+            console.log("Fetched data:", JSON.stringify(data, null, 2));
+            setData(data.data);
+        } else {
+            console.log("Fetched data:", JSON.stringify(data, null, 2));
+            toast.error("User data not found");
+        }
         console.log("Fetched data:", JSON.stringify(data, null, 2));
-        setData(data.userData); 
+        // setData(data.userData); 
         
     } catch (error) {
         console.log(error);
@@ -46,7 +55,8 @@ const getSingleUserData = async () => {
 
         setData({...data,[name]:value,});
     };
-    
+    const navigate = useNavigate();
+
     const handleSubmit = async(e)=>{
         e.preventDefault();
         try {
@@ -61,12 +71,14 @@ const getSingleUserData = async () => {
             );
             if(response.ok){
                 toast.success("Updated successfully");
+                navigate("/admin/users"); 
             }
             else{
                 toast.error("Still not updated");
             }
         } catch (error) {
             console.log(error);
+            toast.error("Something went wrong");
         }
     }
 
@@ -89,8 +101,8 @@ const getSingleUserData = async () => {
                                     name="username"
                                     placeholder="username"
                                     id="username"
-                                    autoComplete="off"
-                                    value={data?.username|| ""}
+                                    
+                                    value={data.username}
                                     onChange={handleInput}
                                     required
                                     />
@@ -104,7 +116,7 @@ const getSingleUserData = async () => {
                                     placeholder="email"
                                     id="email"
                                     autoComplete="off"
-                                    value={data?.email|| ""}
+                                    value={data.email}
                                     onChange={handleInput}
                                     required
                                     />
@@ -119,7 +131,7 @@ const getSingleUserData = async () => {
                                     placeholder="phone"
                                     id="phone"
                                     autoComplete="off"
-                                    value={data?.phone|| ""}
+                                    value={data.phone}
                                     onChange={handleInput}
                                     required
                                 ></input>  
