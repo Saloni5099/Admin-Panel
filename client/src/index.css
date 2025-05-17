@@ -321,7 +321,7 @@ a:hover,a.active{
   font-weight: bold;
 }
 
-.main-heading::after {
+.main-heading::after{
   content: '';
   position: absolute;
   bottom: -1.6rem;
@@ -334,17 +334,18 @@ a:hover,a.active{
 }
 
 .grid-three-cols {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(30rem, 1fr));
-  gap: 6.4rem;
+ grid-template-columns: repeat(3, 1fr);
+ gap: 3.2rem;
+
 }
 
 .card {
+  display: flex;
+  flex-direction: column;
   background: var(--bg-color);
   border-radius: 0.8rem;
-  overflow: hidden;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  gap: 3.2rem;
 }
 
 .card:hover {

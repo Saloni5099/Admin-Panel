@@ -10,7 +10,7 @@ export const Navbar = () => {
           <header>
             <div className = "container">
                 <div className = "logo-brand">
-                  <a href="/">ThapaTechnical</a>
+                  <a>Admin Bridge</a>
                 </div>
 
                 <nav>

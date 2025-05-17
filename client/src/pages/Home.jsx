@@ -8,12 +8,14 @@ export const Home = () => {
              <div className="container grid grid-two-cols">
                <div className="hero-content">
                     <p>We are the World Best IT Company</p>
-                    <h1>Welcome to Thapa Technical</h1>
+                    <h1>Welcome to Admin Bridge</h1>
                     <p>
-                         Are you ready to take your business to the next level with
-                         cutting-edge IT solution Look no further! At Thapa Technical,
-                         we specialize in providing innovative IT services and solutions
-                         tailored to meet your unique needs
+                         Welcome to Your Admin Dashboard
+                         Efficiently manage users, monitor data,
+                         and stay in control—all in one place.
+                         This panel gives you secure access
+                         to all administrative tools and insights
+                         tailored to keep your system running smoothly and effectively.
                     </p>
                     <div className="btn btn-group">
                        <a href="/contact">
