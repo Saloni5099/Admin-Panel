@@ -5,14 +5,17 @@ import { useAuth } from "../../store/auth";
 
 
 export const AdminLayout = ()=>{
-    const {user,isLoading} = useAuth();
-    console.log("Admin layout",user);
-    if(isLoading){
-        return <h1>Loading.....</h1>
+    const { user, isLoading, isLoggedIn } = useAuth();
+
+    if (isLoading) {
+        return <h1>Loading.....</h1>;
     }
-    if(!user.isAdmin){
-        return <Navigate to="/"/>;
-    }    
+    if (!isLoggedIn || !user || typeof user !== "object") {
+        return <Navigate to="/login" replace />;
+    }
+    if (!user.isAdmin) {
+        return <Navigate to="/" replace />;
+    }
     return (
         <>
         <header>

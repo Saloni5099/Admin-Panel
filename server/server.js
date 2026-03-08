@@ -11,13 +11,19 @@ const adminRouter = require("./router/admin-route");
 const connectDb = require("./utils/db");
 const errorMiddleware = require("./middlewares/error-middleware");
 
+if (!process.env.JWT_SECRET_KEY || process.env.JWT_SECRET_KEY.length < 16) {
+    console.error("FATAL: JWT_SECRET_KEY must be set in .env and at least 16 characters");
+    process.exit(1);
+}
+
 const corsOptions = {
-    origin:"http://localhost:5173",
-    methods:"GET,POST,PUT,DELETE,PATCH,HEAD",
-    credentials:true,
+    origin: process.env.CORS_ORIGIN || "http://localhost:5173",
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    credentials: true,
 };
+
 app.use(cors(corsOptions));
-app.use(express.json());
+app.use(express.json({ limit: "100kb" }));
 app.use("/api/auth", authRouter);
 app.use("/api/form", contactRouter);
 app.use("/api/data", serviceRouter);

@@ -18,32 +18,28 @@ const home = async (req,res)=>{
 // Registration logic 
 // *___________________
 
-const register = async (req,res)=>{
-    try{
-        console.log(req.body);
-        const {username,email,phone,password} = req.body;
+const register = async (req, res, next) => {
+    try {
+        const { username, email, phone, password } = req.body;
 
-        const userExist = await User.findOne({email});
-        if(userExist){
-            return res.status(400).json({msg:"email already registered"});
+        const userExist = await User.findOne({ email });
+        if (userExist) {
+            return res.status(400).json({ msg: "email already registered" });
         }
-        //hash the password
-        // const saltRound = 10;
-        // const hash_password = await bcrypt.hash(password,saltRound);
         const userCreated = await User.create({
             username,
             email,
             phone,
-            password 
+            password,
         });
-            res.status(201).json({
-            msg:"Registration Successfull",
-            token:await userCreated.generateToken(),
-            userid:userCreated._id.toString(),});
-    }catch(error){
-       //res.status(500).json({msg:"page not found"});
-       console.log(error);
-       next(error);
+        res.status(201).json({
+            msg: "Registration Successfull",
+            token: await userCreated.generateToken(),
+            userid: userCreated._id.toString(),
+        });
+    } catch (error) {
+        console.error(error);
+        next(error);
     }
 };
 
@@ -51,29 +47,30 @@ const register = async (req,res)=>{
 // Login logic 
 // *___________________
 
-const login = async (req,res)=>{
+const login = async (req, res, next) => {
     try {
-        const {email,password} = req.body;
-        const userExist = await User.findOne({email});
-        console.log(userExist);
-        if(!userExist){
-            return res.status(500).json({msg:"Invalid Credential"});
+        const { email, password } = req.body;
+        if (!email || !password) {
+            return res.status(400).json({ msg: "Email and password are required" });
         }
-        const user = await bcrypt.compare(password,userExist.password);
-        if(user){
-                res.status(200).json({
-                msg:"Login Successfull",
+        const userExist = await User.findOne({ email });
+        if (!userExist) {
+            return res.status(401).json({ msg: "Invalid email or password" });
+        }
+        const isMatch = await bcrypt.compare(password, userExist.password);
+        if (isMatch) {
+            res.status(200).json({
+                msg: "Login Successfull",
                 token: await userExist.generateToken(),
                 userId: userExist._id.toString(),
             });
-        }
-        else{
-            res.status(401).json({msg:"Invalid email or password"});
+        } else {
+            res.status(401).json({ msg: "Invalid email or password" });
         }
     } catch (error) {
-        res.status(500).json("Page not found");
+        next(error);
     }
-}
+};
 
 /*_____________________________
 
@@ -81,13 +78,12 @@ USER LOGIN
 _______________________________*/
 
 
-const user = async(req,res)=>{
+const user = async (req, res, next) => {
     try {
         const userData = req.user;
-        console.log(userData);
-        return res.status(200).json({userData});
+        return res.status(200).json({ userData });
     } catch (error) {
-        console.log(`error from the user route ${error}`);
+        next(error);
     }
 };
 

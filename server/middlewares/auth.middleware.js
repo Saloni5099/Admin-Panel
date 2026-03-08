@@ -9,12 +9,12 @@ const authMiddleware = async (req,res,next) => {
      const jwtToken = token.replace("Bearer","").trim();
      //console.log("token from auth middleware",jwtToken);
 
-     try{
-        const isVerified = jwt.verify(jwtToken,process.env.JWT_SECRET_KEY);
-        console.log(isVerified);
-        const userData = await User.findOne({email:isVerified.email}).select({password:0,});
-        console.log(userData);
-
+     try {
+        const isVerified = jwt.verify(jwtToken, process.env.JWT_SECRET_KEY);
+        const userData = await User.findOne({ email: isVerified.email }).select({ password: 0 });
+        if (!userData) {
+            return res.status(401).json({ message: "User not found" });
+        }
         req.user = userData;
         req.token = token;
         req.userID = userData._id;

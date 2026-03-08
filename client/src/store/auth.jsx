@@ -4,7 +4,7 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({children}) => {
     const [token,setToken]=useState(localStorage.getItem("token"));
-    const [user,setUser] = useState("");
+    const [user, setUser] = useState(null);
     const [isLoading,setIsLoading] = useState(true);
     const [services,setServices] = useState([]);
     const authorizationToken = `Bearer ${token}`;
@@ -14,12 +14,18 @@ export const AuthProvider = ({children}) => {
         return localStorage.setItem("token",serverToken);
     };
     let isLoggedIn = !!token; 
-    const LogoutUser = () =>{
+    const LogoutUser = () => {
         setToken("");
+        setUser(null);
         return localStorage.removeItem("token");
     };
     // JWT AUTHENTICATION -to get the currently loggedIN user data
     const userAuthentication = async ()=>{
+        if (!token) {
+            setIsLoading(false);
+            setUser(null);
+            return;
+        }
         try {
             setIsLoading(true);
             const response = await fetch(`${API}/api/auth/user`,{
@@ -28,14 +34,16 @@ export const AuthProvider = ({children}) => {
                     Authorization:authorizationToken,
                 },
             });
-            if(response.ok){
-              const data = await response.json();
-              console.log("hello this is user data",data.userData);
-              setUser(data.userData);
-              setIsLoading(false);
+            if (response.ok) {
+                const data = await response.json();
+                setUser(data.userData);
+            } else {
+                setUser(null);
             }
         } catch (error) {
-            console.log(error,"Error fetching user data");
+            setUser(null);
+        } finally {
+            setIsLoading(false);
         }
     }
     // to fetch the services data from the database
@@ -56,7 +64,7 @@ export const AuthProvider = ({children}) => {
     useEffect(()=>{
         getServices();
         userAuthentication();
-    },[]);
+    },[token]);
     return (
      <AuthContext.Provider value={{isLoggedIn,storeTokenInLS,LogoutUser,user,services,authorizationToken,API,isLoading}}>
         {children}

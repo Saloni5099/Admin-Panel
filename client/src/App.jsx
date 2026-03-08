@@ -1,4 +1,4 @@
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {BrowserRouter, Route, Routes, Navigate} from "react-router-dom";
 import { Home } from "./pages/Home";
 import { About } from "./pages/About";
 import { Contact } from "./pages/Contact";
@@ -28,6 +28,7 @@ const App = () => {
            <Route path="/logout" element={<Logout />} />
            <Route path="*" element={<Error />} />
            <Route path="/admin" element={<AdminLayout/>}>
+               <Route index element={<Navigate to="/admin/users" replace />} />
                <Route path="users" element={<AdminUsers/>}/>
                <Route path="contacts" element={<AdminContacts/>}/>
                <Route path="users/:id/edit" element={<AdminUpdate/>}/>
