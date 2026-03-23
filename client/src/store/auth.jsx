@@ -8,7 +8,7 @@ export const AuthProvider = ({children}) => {
     const [isLoading,setIsLoading] = useState(true);
     const [services,setServices] = useState([]);
     const authorizationToken = `Bearer ${token}`;
-    const API = "http://localhost:5000";
+    const API = "https://admin-panel-backend-0hc8.onrender.com";
     const storeTokenInLS = (serverToken)=>{
         setToken(serverToken);        // add it to not refresh after login
         return localStorage.setItem("token",serverToken);
