@@ -17,7 +17,7 @@ const {authorizationToken} = useAuth();
 const getSingleUserData = async () => {
 
     try {
-        const response = await fetch(`http://localhost:5000/api/admin/users/${params.id}`,
+        const response = await fetch(`https://admin-panel-backend-0hc8.onrender.com/api/admin/users/${params.id}`,
             {
                 method:"GET",
                 headers:{
@@ -60,7 +60,7 @@ const getSingleUserData = async () => {
     const handleSubmit = async(e)=>{
         e.preventDefault();
         try {
-            const response = await fetch(`http://localhost:5000/api/admin/users/update/${params.id}`,
+            const response = await fetch(`https://admin-panel-backend-0hc8.onrender.com/api/admin/users/update/${params.id}`,
             {
                 method:"PATCH",
                 headers:{
