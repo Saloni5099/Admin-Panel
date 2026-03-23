@@ -40,15 +40,14 @@ app.use("/api/admin",adminRouter);
 //     res.status(200).send("Welcome to registration page");
 // });
 app.use(errorMiddleware);
-// const PORT = 5000;
-// connectDb().then(() => {
-//     app.listen(PORT, () => {
-//         console.log(`server is running at port: ${PORT} `);
-//     });
-// })
+const PORT = process.env.PORT || 5000;
+connectDb().then(() => {
+    app.listen(PORT, () => {
+        console.log(`server is running at port: ${PORT} `);
+    });
+})
 
 // connect database
 connectDb();
 
-// important for Vercel
-module.exports = app;
+
