@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../store/auth";
 import { toast } from "react-toastify";
-const URL = "http://localhost:5000/api/auth/register";
+const URL = "https://admin-panel-backend-0hc8.onrender.com/api/auth/register";
 export const Register = () => {
     const [user,setUser] = useState({
         username:"",
