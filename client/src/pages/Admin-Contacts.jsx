@@ -8,7 +8,7 @@ export const AdminContacts = ()=>{
     const {authorizationToken} = useAuth();
     const getContactsData = async()=>{
         try {
-        const response = await fetch("http://localhost:5000/api/admin/contacts",{
+        const response = await fetch("https://admin-panel-backend-0hc8.onrender.com/api/admin/contacts",{
             method:"GET",
             headers:{
                 Authorization:authorizationToken,
@@ -25,7 +25,7 @@ export const AdminContacts = ()=>{
     };
     const deleteContactById = async(id)=>{
          try {
-            const response = await fetch(`http://localhost:5000/api/admin/contacts/delete/${id}`,
+            const response = await fetch(`https://admin-panel-backend-0hc8.onrender.com/api/admin/contacts/delete/${id}`,
                 {
                     method:"DELETE",
                     headers:{
