@@ -32,7 +32,7 @@ const handleInput = (e) => {
 const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        const response = await fetch("http://localhost:5000/api/form/contact",{
+        const response = await fetch("https://admin-panel-backend-0hc8.onrender.com/api/form/contact",{
             method:"POST",
             headers:{
                 'Content-Type':"application/json"
