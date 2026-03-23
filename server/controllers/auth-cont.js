@@ -2,7 +2,7 @@
  // Controllers are typically used to process incoming requests,interact with models(data sources),and send responses back to client. 
  // They help organizee your application by separating concerns and following the MVC(Model-view-controller) design pattern
  const User = require("../models/user-model");
- const bcrypt = require("bcrypt");
+ const bcrypt = require("bcryptjs");
 // *___________________
 // Home logic 
 // *___________________
